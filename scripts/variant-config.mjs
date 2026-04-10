@@ -1,7 +1,9 @@
 export const ACTION_DEFINITIONS = [
   {
-    icon: "display-json-value",
+    activeKeyIcon: "display-json-value-key-active",
     key: "displayUrlData",
+    keyIcon: "display-json-value-key",
+    listIcon: "display-json-value-list",
     multiAction: true,
     name: "Display URL Data",
     suffix: "display-url-data",

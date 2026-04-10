@@ -39,15 +39,15 @@ function buildManifest(variant, packageVersion) {
     .map((action) => ({
       Controllers: ["Keypad"],
       DisableAutomaticStates: true,
-      Icon: `imgs/actions/${action.icon}`,
+      Icon: `imgs/actions/${action.listIcon}`,
       Name: action.name,
       States: [
         {
-          Image: `imgs/actions/${action.icon}`,
+          Image: `imgs/actions/${action.keyIcon}`,
           ShowTitle: true
         },
         {
-          Image: `imgs/actions/${action.icon}-active`,
+          Image: `imgs/actions/${action.activeKeyIcon}`,
           ShowTitle: true
         }
       ],
@@ -62,7 +62,7 @@ function buildManifest(variant, packageVersion) {
     Actions: actions,
     Author: "Zeuz",
     Category: variant.category,
-    CategoryIcon: "imgs/category-icon-meta",
+    CategoryIcon: "imgs/category-icon-list",
     CodePath: "bin/plugin.js",
     Description: variant.description,
     Icon: "imgs/plugin-icon",
