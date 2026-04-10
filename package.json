@@ -1,0 +1,45 @@
+{
+  "name": "streamdeck-url-data-fetcher",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Stream Deck plugin for fetching JSON from URLs and rendering live data tiles.",
+  "type": "module",
+  "scripts": {
+    "assets:generate": "node scripts/generate-brand-assets.mjs",
+    "build": "npm run icons:generate && npm run assets:generate && node scripts/build.mjs",
+    "build:free": "npm run icons:generate && npm run assets:generate && node scripts/build.mjs --variant=free",
+    "build:premium": "npm run icons:generate && npm run assets:generate && node scripts/build.mjs --variant=premium",
+    "icons:generate": "node scripts/generate-material-icons.mjs",
+    "lint": "eslint .",
+    "pack:variants": "node scripts/package-variants.mjs pack",
+    "sd:dev:free": "npm run build:free && node scripts/streamdeck-dev.mjs dev free",
+    "sd:dev:premium": "npm run build:premium && node scripts/streamdeck-dev.mjs dev premium",
+    "sd:doctor": "node scripts/streamdeck-dev.mjs doctor",
+    "sd:link:free": "node scripts/streamdeck-dev.mjs link free",
+    "sd:link:premium": "node scripts/streamdeck-dev.mjs link premium",
+    "sd:logs": "node scripts/streamdeck-dev.mjs logs",
+    "sd:logs:free": "node scripts/streamdeck-dev.mjs logs free",
+    "sd:logs:premium": "node scripts/streamdeck-dev.mjs logs premium",
+    "sd:restart:free": "node scripts/streamdeck-dev.mjs restart free",
+    "sd:restart:premium": "node scripts/streamdeck-dev.mjs restart premium",
+    "typecheck": "tsc --noEmit",
+    "validate:variants": "node scripts/package-variants.mjs validate",
+    "verify": "npm run typecheck && npm run build"
+  },
+  "dependencies": {
+    "@elgato/streamdeck": "^2.0.4"
+  },
+  "devDependencies": {
+    "@elgato/eslint-config": "^0.3.2",
+    "@eslint/js": "^9.39.1",
+    "@material-design-icons/svg": "^0.14.15",
+    "@types/node": "^25.5.2",
+    "esbuild": "^0.28.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-jsdoc": "^54.7.0",
+    "globals": "^17.4.0",
+    "sharp": "^0.34.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.58.0"
+  }
+}

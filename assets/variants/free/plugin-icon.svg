@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144">
+      <defs>
+        <linearGradient id="bg" x1="18" y1="12" x2="126" y2="132" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#0f1726"/>
+          <stop offset="1" stop-color="#142336"/>
+        </linearGradient>
+        <linearGradient id="panel" x1="32" y1="24" x2="110" y2="116" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#53c8ff"/>
+          <stop offset="1" stop-color="#8cf0ff"/>
+        </linearGradient>
+      </defs>
+      <rect width="144" height="144" rx="30" fill="url(#bg)"/>
+      <rect x="19" y="19" width="106" height="106" rx="24" fill="#0c1320" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+      <path d="M47 42h24c10 0 18 8 18 18v4H73c-10 0-18-8-18-18v-4zm42 38h8c10 0 18 8 18 18v4H91c-10 0-18-8-18-18v-4h16zm-42 0h8c10 0 18 8 18 18v4H49c-10 0-18-8-18-18v-4h16z" fill="url(#panel)"/>
+      <circle cx="99" cy="45" r="17" fill="#ffb84d" opacity="0.92"/>
+      <path d="M94 45.5h10.5M104 45.5l-3.3-3.2M104 45.5l-3.3 3.2" stroke="#0e1726" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="32" y="108" width="80" height="10" rx="5" fill="rgba(255,255,255,0.12)"/>
+      <text x="36" y="117" fill="#f5fbff" font-family="'Segoe UI',sans-serif" font-size="8" font-weight="700" letter-spacing=".18em">LIVE URL</text>
+    </svg>

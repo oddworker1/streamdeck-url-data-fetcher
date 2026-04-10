@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.sdPlugin/logs/
+*.streamDeckPlugin
+*.zip
+.DS_Store
+com.zeuz.homey.sdPlugin/
+com.zeuz.homey.plus.sdPlugin/
+com.zeuz.urldatafetcher.sdPlugin/
+com.zeuz.urldatafetcher.pro.sdPlugin/
