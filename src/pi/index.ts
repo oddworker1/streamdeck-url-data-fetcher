@@ -112,6 +112,14 @@ class PropertyInspectorApp {
 
   handleSocketClosed(): void {
     this.socket = undefined;
+    if (this.settingsTimer) {
+      window.clearTimeout(this.settingsTimer);
+      this.settingsTimer = undefined;
+    }
+    if (this.previewTimer) {
+      window.clearTimeout(this.previewTimer);
+      this.previewTimer = undefined;
+    }
     this.statusMessage = "Disconnected from Stream Deck.";
     this.render();
   }
@@ -603,6 +611,8 @@ if (!root) {
 }
 
 const app = new PropertyInspectorApp(root);
+let activeSocket: WebSocket | undefined;
+let connectionGeneration = 0;
 
 declare global {
   interface Window {
@@ -619,28 +629,45 @@ declare global {
 window.connectElgatoStreamDeckSocket = (port, uuid, event, info, actionInfo) => {
   const registrationInfo = JSON.parse(info) as RegistrationInfo;
   const parsedActionInfo = JSON.parse(actionInfo) as ActionInfo;
+  connectionGeneration += 1;
+  const generation = connectionGeneration;
 
-  const openSocket = () => {
-    const socket = new WebSocket(`ws://127.0.0.1:${port}`);
+  if (activeSocket && activeSocket.readyState !== WebSocket.CLOSED) {
+    activeSocket.close();
+  }
 
-    socket.addEventListener("open", () => {
-      socket.send(JSON.stringify({ event, uuid }));
-      app.connect(socket, uuid, registrationInfo, parsedActionInfo);
-    });
+  const socket = new WebSocket(`ws://127.0.0.1:${port}`);
+  activeSocket = socket;
 
-    socket.addEventListener("message", (messageEvent) => {
-      try {
-        app.handleIncomingMessage(JSON.parse(String(messageEvent.data)));
-      } catch {
-        // Ignore malformed payloads.
-      }
-    });
+  socket.addEventListener("open", () => {
+    if (generation !== connectionGeneration) {
+      socket.close();
+      return;
+    }
 
-    socket.addEventListener("close", () => {
+    socket.send(JSON.stringify({ event, uuid }));
+    app.connect(socket, uuid, registrationInfo, parsedActionInfo);
+  });
+
+  socket.addEventListener("message", (messageEvent) => {
+    if (generation !== connectionGeneration) {
+      return;
+    }
+
+    try {
+      app.handleIncomingMessage(JSON.parse(String(messageEvent.data)));
+    } catch {
+      // Ignore malformed payloads.
+    }
+  });
+
+  socket.addEventListener("close", () => {
+    if (activeSocket === socket) {
+      activeSocket = undefined;
+    }
+
+    if (generation === connectionGeneration) {
       app.handleSocketClosed();
-      window.setTimeout(openSocket, 1_000);
-    });
-  };
-
-  openSocket();
+    }
+  });
 };
